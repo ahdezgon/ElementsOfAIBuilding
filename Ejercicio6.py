@@ -2,8 +2,8 @@
 import numpy as np
 import random
 
-N = 100     # size of the problem is N x N                                      
-steps = 3000    # total number of iterations                                        
+N = 100                                          
+steps = 3000                                            
 tracks = 50
 
 def generator(x, y, x0=0.0, y0=0.0):
@@ -28,20 +28,17 @@ def main():
     global y
 
     for step in range(steps):
-        # add a temperature schedule here
         T = max(0.001, ((steps - step)/steps)**3-.005)
-        # update solutions on each search track                                     
         for i in range(tracks):
-            # try a new solution near the current one                               
             x_new = np.random.randint(max(0, x[i]-2), min(N, x[i]+2+1))
             y_new = np.random.randint(max(0, y[i]-2), min(N, y[i]+2+1))
             S_old = h[x[i], y[i]]
             S_new = h[x_new, y_new]
 
             if random.random() < annealing_prob(S_old, S_new, T):
-                x[i], y[i] = x_new, y_new       # new slution is better, go here
+                x[i], y[i] = x_new, y_new       
             else:
-                pass                        # if the new solution is worse, do nothing
+                pass                        
 
     print(sum([x[j] == peak_x and y[j] == peak_y for j in range(tracks)])) 
 main()
