@@ -13,7 +13,6 @@ def permute(route, ports):
 
 permute([0], list(range(1, len(portnames))))
 
-#### SVAR
 def permutations(route, ports):
     if len(ports) < 1:
         print(' '.join([portnames[i] for i in route]))
